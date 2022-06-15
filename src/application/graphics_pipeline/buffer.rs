@@ -1,6 +1,6 @@
 use std::sync::Arc;
 
-use super::vertex::Vertex;
+use crate::geometry::Vertex;
 
 use vulkano::buffer::{BufferUsage, TypedBufferAccess};
 use vulkano::buffer::immutable::ImmutableBuffer;

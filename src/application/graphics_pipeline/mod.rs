@@ -1,5 +1,4 @@
 mod buffer;
-mod vertex;
 
 mod vertex_shader {
     vulkano_shaders::shader! {
@@ -20,7 +19,7 @@ use buffer::{get_command_buffers, get_framebuffers, create_vertex_buffer, create
 use std::sync::Arc;
 use super::window_surface::WindowSurface;
 
-use vertex::Vertex;
+use crate::geometry::{Vertex, get_middle_position};
 
 use vulkano::device::{Device, Queue};
 use vulkano::image::SwapchainImage;
@@ -83,6 +82,7 @@ pub fn finalise(device: Arc<Device>, queue: Arc<Queue>, mut surface: WindowSurfa
         position: [-0.5* size, 0.5* size] ,
         colour: [255.0, 0.0, 0.0]
     };
+    
     let vertex2 = Vertex {
         position: [0.5* size, 0.5* size],
         colour: [0.0, 255.0, 0.0]
@@ -99,7 +99,7 @@ pub fn finalise(device: Arc<Device>, queue: Arc<Queue>, mut surface: WindowSurfa
     
     let index_buffer = create_index_buffer(vec![0, 1, 2, 2, 3, 0], &queue);
 
-    println!("{:?}", vertex::get_middle_position(vec![vertex1, vertex2, vertex3, vertex4]).position);
+    println!("{:?}", get_middle_position(vec![vertex1.position, vertex2.position, vertex3.position, vertex4.position]));
 
     let vertex_shader = vertex_shader::load(device.clone()).expect("failed to create shader module");
     let fragment_shader = fragment_shader::load(device.clone()).expect("failed to create shader module");

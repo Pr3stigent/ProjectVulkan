@@ -1,7 +1,7 @@
 mod device_creation;
 mod graphics_pipeline;
 mod swapchain;
-mod window_surface;
+pub mod window_surface;
 
 use device_creation::logical_device;
 

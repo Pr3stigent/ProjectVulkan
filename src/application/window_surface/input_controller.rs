@@ -7,6 +7,7 @@ use winit::{
     event::{ Event, WindowEvent, KeyboardInput, VirtualKeyCode, ElementState }
 };
 
+#[allow(dead_code)]
 #[derive(Hash, Eq, PartialEq, Debug, Copy, Clone)]
 pub enum InputEvent {
     Began(fn(Input)),
@@ -14,11 +15,14 @@ pub enum InputEvent {
     Ended(fn(Input))
 }
 
+
+#[allow(dead_code)]
 pub enum Hold {
     OneKey,
     AllKeys,
 }
 
+#[allow(dead_code)]
 pub struct InputStruct {
     pub event: InputEvent,
     keys: Option<VirtualKeyCode>,
@@ -32,10 +36,12 @@ pub struct Input {
 
 pub static CALLBACKS: Lazy<Arc<Mutex<Vec<InputStruct>>>> = Lazy::new(|| Arc::new(Mutex::new(Vec::new())));
 
+
+#[allow(dead_code)]
 fn callback_handler(virtual_keycode: Option<VirtualKeyCode>, input_event: &mut InputStruct, callback: fn(Input)) {
     match virtual_keycode {
         Some(virtual_keycode) => {
-            if let Some(i) = input_event.keys {
+            if let Some(_) = input_event.keys {
                 if virtual_keycode != input_event.keys.unwrap() {
                     return
                 }
@@ -61,6 +67,7 @@ pub fn on_input(event: InputEvent, keys: &Option<VirtualKeyCode>) {
         });
 }
 
+#[allow(dead_code)]
 pub fn process_event(event:  &Event<()>) {
     match event {
         Event::WindowEvent { event, .. } => match *event {

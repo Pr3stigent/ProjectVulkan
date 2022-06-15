@@ -1,3 +1,5 @@
+pub mod input_controller;
+
 use vulkano::instance::Instance;
 use vulkano::swapchain::Surface;
 
